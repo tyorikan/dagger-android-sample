@@ -1,22 +1,34 @@
-package dagger.demo;
+package dagger.demo.ui.activity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class DemoActivity extends Activity implements HasComponent<DemoActivityComponent> {
-    private DemoActivityComponent component;
+import javax.inject.Inject;
+
+import dagger.demo.App;
+import dagger.demo.R;
+import dagger.demo.module.ActivityModule;
+import dagger.demo.ui.component.DaggerDemoActivityComponent;
+import dagger.demo.ui.component.DemoActivityComponent;
+import dagger.demo.ui.fragment.DemoFragment;
+
+public class DemoActivity extends Activity {
+
+    private static final String TAG = DemoActivity.class.getSimpleName();
+
+    protected DemoActivityComponent mComponent;
+    @Inject
+    SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        this.component = DaggerDemoActivityComponent.builder()
-                .demoApplicationComponent(((DemoApplication) getApplication()).getComponent())
-                .activityModule(new ActivityModule(this))
-                .build();
-        component.injectActivity(this);
+        setupGraph();
+        Log.d(TAG, mSharedPreferences.toString());
 
         setContentView(R.layout.activity_demo);
         if (savedInstanceState == null) {
@@ -26,9 +38,12 @@ public class DemoActivity extends Activity implements HasComponent<DemoActivityC
         }
     }
 
-    @Override
-    public DemoActivityComponent getComponent() {
-        return component;
+    private void setupGraph() {
+        mComponent = DaggerDemoActivityComponent.builder()
+                .applicationComponent(App.get().getComponent())
+                .activityModule(new ActivityModule(this))
+                .build();
+        mComponent.inject(this);
     }
 
     @Override
@@ -50,5 +65,7 @@ public class DemoActivity extends Activity implements HasComponent<DemoActivityC
         return super.onOptionsItemSelected(item);
     }
 
-
+    public DemoActivityComponent getComponent() {
+        return mComponent;
+    }
 }
