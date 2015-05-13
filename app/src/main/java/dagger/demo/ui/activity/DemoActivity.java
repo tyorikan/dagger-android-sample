@@ -11,18 +11,19 @@ import javax.inject.Inject;
 
 import dagger.demo.App;
 import dagger.demo.R;
+import dagger.demo.component.DaggerDemoActivityComponent;
+import dagger.demo.component.DemoActivityComponent;
 import dagger.demo.module.ActivityModule;
-import dagger.demo.ui.component.DaggerDemoActivityComponent;
-import dagger.demo.ui.component.DemoActivityComponent;
 import dagger.demo.ui.fragment.DemoFragment;
 
 public class DemoActivity extends Activity {
 
     private static final String TAG = DemoActivity.class.getSimpleName();
 
-    protected DemoActivityComponent mComponent;
     @Inject
     SharedPreferences mSharedPreferences;
+
+    private DemoActivityComponent mComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,10 @@ public class DemoActivity extends Activity {
         mComponent.inject(this);
     }
 
+    public DemoActivityComponent getComponent() {
+        return mComponent;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -63,9 +68,5 @@ public class DemoActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public DemoActivityComponent getComponent() {
-        return mComponent;
     }
 }

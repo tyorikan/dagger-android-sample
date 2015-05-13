@@ -1,10 +1,10 @@
-package dagger.demo.module.component;
+package dagger.demo.component;
 
 import android.app.Activity;
 
 import dagger.Component;
 import dagger.demo.module.ActivityModule;
-import dagger.demo.module.scope.PerActivity;
+import dagger.demo.scope.PerActivity;
 
 /**
  * A base component upon which fragment's components may depend.

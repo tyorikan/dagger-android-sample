@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import dagger.Module;
 import dagger.Provides;
-import dagger.demo.module.scope.PerActivity;
+import dagger.demo.scope.PerActivity;
 
 /**
  * A module to wrap the Activity state and expose it to the graph.

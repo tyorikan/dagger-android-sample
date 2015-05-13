@@ -1,4 +1,4 @@
-package dagger.demo.module.component;
+package dagger.demo.component;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -18,7 +18,7 @@ import dagger.demo.module.ApplicationModule;
 )
 public interface ApplicationComponent {
 
-    // Field injections of any dependencies of the DemoApplication
+    // Field injections of any dependencies of the App
     void inject(App application);
 
     // Exported for child-components.

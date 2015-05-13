@@ -1,4 +1,4 @@
-package dagger.demo.module.scope;
+package dagger.demo.scope;
 
 
 import java.lang.annotation.Retention;

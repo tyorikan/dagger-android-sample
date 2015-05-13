@@ -3,8 +3,8 @@ package dagger.demo;
 import android.app.Application;
 
 import dagger.demo.module.ApplicationModule;
-import dagger.demo.module.component.ApplicationComponent;
-import dagger.demo.module.component.DaggerApplicationComponent;
+import dagger.demo.component.ApplicationComponent;
+import dagger.demo.component.DaggerApplicationComponent;
 
 /**
  * Created by gak on 9/25/14.
